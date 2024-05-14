@@ -1,0 +1,32 @@
+
+O = [+, -, *, /]
+
+T = [x_i,y],i ∈[(1,n) ̅ ]
+
+Train set = [x_i (t),y(t)],i ∈[1,n],t ∈[1,T]
+
+Testing set = [x_i (t),y(t)],i ∈[1,n],t ∈[T+1,W],
+
+RMSE = fit(M) = √((∑_(t=1)^T▒(y ̅(t)-y(t))^2 )/T)
+
+ RMSerror:
+  SQRT((testValue - M_Value)*(testValue - M_Value))
+
+CREATE P random tree-like models FROM terminals T & O 
+
+genCount = 0
+REPEAT
+ FOR EVERY tree M
+      CALCULATE fitness F FROM T elements of training samples
+ SORT from best to worst
+ 'ADJUST F of large size M
+ SELECT the best N trees (CONDITION : P/2 < N < P)
+ APPLY crossover & pointMutation & subtreeMutation & hoistMutation WITH probabilities p_C, p_M .... AND R random
+ CREATE M_offspring models FROM best M trees
+ CALCULATE fitness of M_offspring
+ COMBINE M & M_offspring
+ SORT (M + M_offspring)
+ SELECT best P trees
+
+ genCount= genCount+1
+UNTIL F<THRESHOLD OR R repetitions
